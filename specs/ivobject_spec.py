@@ -123,12 +123,12 @@ with description('Value Object'):
 
             with it('must not have any arg initialized to None'):
                 expect(lambda: Point(1, None)).to(
-                    raise_error(ArgWithoutValueException)
+                    raise_error(ArgWithoutValueException, 'Missing value for Point')
                 )
 
             with it('must not have any kwarg initialized to None'):
                 expect(lambda: Point(1, y=None)).to(
-                    raise_error(ArgWithoutValueException)
+                    raise_error(ArgWithoutValueException, 'Missing value for Point')
                 )
 
             with it('must have number of values equal to number of args'):
@@ -256,11 +256,17 @@ with description('Value Object'):
 
 
             expect(lambda: AnotherPoint(-5, 3)).to(
-                raise_error(ViolatedInvariantException, 'Params violates invariant: inside_first_quadrant')
+                raise_error(
+                    ViolatedInvariantException,
+                    'Value in AnotherPoint violates "inside_first_quadrant" invariant'
+                )
             )
 
             expect(lambda: AnotherPoint(6, 3)).to(
-                raise_error(ViolatedInvariantException, 'Params violates invariant: x_less_than_y')
+                raise_error(
+                    ViolatedInvariantException,
+                    'Value in AnotherPoint violates "x_less_than_y" invariant'
+                )
             )
 
         with it('raises an exception when a declared invariant doesnt returns a boolean value'):
@@ -288,7 +294,10 @@ with description('Value Object'):
 
 
             expect(lambda: AnotherPoint(x=5.8, y=3)).to(
-                raise_error(ViolatedInvariantException, 'Params violates invariant: x_must_be_integer')
+                raise_error(
+                    ViolatedInvariantException,
+                    'Value in AnotherPoint violates "x_must_be_integer" invariant'
+                )
             )
 
         with it('evaluates param invariants first'):
@@ -306,5 +315,8 @@ with description('Value Object'):
 
 
             expect(lambda: AnotherPoint(x="1", y=3)).to(
-                raise_error(ViolatedInvariantException, 'Params violates invariant: x_must_be_integer')
+                raise_error(
+                    ViolatedInvariantException,
+                    'Value in AnotherPoint violates "x_must_be_integer" invariant'
+                )
             )

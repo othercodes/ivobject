@@ -66,10 +66,14 @@ class ValueObject(object):
                 raise NotDeclaredArgsException()
 
             if None in args:
-                raise ArgWithoutValueException()
+                raise ArgWithoutValueException('Missing value for {}'.format(
+                    self.__class__.__name__
+                ))
 
             if None in kwargs.values():
-                raise ArgWithoutValueException()
+                raise ArgWithoutValueException('Missing value for {}'.format(
+                    self.__class__.__name__
+                ))
 
         def replace_mutable_kwargs_with_immutable_types() -> None:
             for arg, value in kwargs.items():
@@ -96,7 +100,10 @@ class ValueObject(object):
         def check_invariants() -> None:
             for invariant in obtain_invariants():
                 if not invariant_execute(invariant[INVARIANT_METHOD]):
-                    raise ViolatedInvariantException('Params violates invariant: {}'.format(invariant[INVARIANT_NAME]))
+                    raise ViolatedInvariantException('Value in {} violates "{}" invariant'.format(
+                        self.__class__.__name__,
+                        invariant[INVARIANT_NAME]
+                    ))
 
         def invariant_execute(invariant) -> bool:
             return_value = invariant(self, self)
