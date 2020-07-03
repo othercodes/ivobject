@@ -258,14 +258,14 @@ with description('Value Object'):
             expect(lambda: AnotherPoint(-5, 3)).to(
                 raise_error(
                     ViolatedInvariantException,
-                    'Value in AnotherPoint violates "inside_first_quadrant" invariant'
+                    'Value in AnotherPoint violates "inside first quadrant" invariant rule'
                 )
             )
 
             expect(lambda: AnotherPoint(6, 3)).to(
                 raise_error(
                     ViolatedInvariantException,
-                    'Value in AnotherPoint violates "x_less_than_y" invariant'
+                    'Value in AnotherPoint violates "x less than y" invariant rule'
                 )
             )
 
@@ -296,7 +296,7 @@ with description('Value Object'):
             expect(lambda: AnotherPoint(x=5.8, y=3)).to(
                 raise_error(
                     ViolatedInvariantException,
-                    'Value in AnotherPoint violates "x_must_be_integer" invariant'
+                    'Value in AnotherPoint violates "x must be integer" invariant rule'
                 )
             )
 
@@ -317,6 +317,6 @@ with description('Value Object'):
             expect(lambda: AnotherPoint(x="1", y=3)).to(
                 raise_error(
                     ViolatedInvariantException,
-                    'Value in AnotherPoint violates "x_must_be_integer" invariant'
+                    'Value in AnotherPoint violates "x must be integer" invariant rule'
                 )
             )

@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='IVObject',
-    version='1.0.1',
+    version='1.0.2',
     license='MIT',
     author='Unay Santisteban',
     author_email='usantisteban@othercode.es',

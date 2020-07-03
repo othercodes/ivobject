@@ -100,9 +100,9 @@ class ValueObject(object):
         def check_invariants() -> None:
             for invariant in obtain_invariants():
                 if not invariant_execute(invariant[INVARIANT_METHOD]):
-                    raise ViolatedInvariantException('Value in {} violates "{}" invariant'.format(
+                    raise ViolatedInvariantException('Value in {} violates "{}" invariant rule'.format(
                         self.__class__.__name__,
-                        invariant[INVARIANT_NAME]
+                        invariant[INVARIANT_NAME].replace('_', ' ')
                     ))
 
         def invariant_execute(invariant) -> bool:
